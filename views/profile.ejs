@@ -1,0 +1,25 @@
+<html>
+<head>
+	<title>Chat app</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" type="text/css" href="../../scripts/bulma.css"/>
+</head>
+<body>
+	<% include nav %>
+	<div class="column is-half is-offset-one-quarter">
+		<h1 class="title has-text-centered">My Profile</h1>
+		<div class="field">
+			<div class="card">
+				<div class="card-content">
+					<ul>
+						<li>Name: <%=user.local.name%></li>
+						<li>Group: <%-user.local.group%></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

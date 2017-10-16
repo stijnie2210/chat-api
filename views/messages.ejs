@@ -1,0 +1,48 @@
+<html>
+<head>
+	<title>Chat app</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" type="text/css" href="../scripts/bulma.css"/>
+</head>
+<body>
+	<% include nav %>
+	<div class="column is-half is-offset-one-quarter">
+		<h1 class="title has-text-centered">Messages</h1>
+		<div class="field">
+			<ul>
+				<% for (message of messages) { %>
+				<div class="card">
+					<div class="card-content">
+						<li>
+							<%= message.user %>: <%=message.message %>
+							<% if(user.local.group == 'admin') { %>
+								<a href="/web/messages/<%=message.id%>?_method=DELETE" class="button is-danger is-pulled-right">Delete</a>
+							<% } %>
+						</li>
+						<li>Time: <%= message.time %></li>
+					</div>
+				</div>
+				<% } %>
+			</ul>
+		</div>
+		<div class="field">
+			<div class="card">
+				<div class="card-content">
+					<h2 class="subtitle">Send Message</h2>
+					<form action="/web/messages" method="POST">
+						<div class="field">
+							<label class="label" value="Message"/>
+							<input class="input" type="text" name="message"required/>
+						</div>
+						<div class="field">
+							<input class="button is-primary" type="submit" value="Send"/>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
