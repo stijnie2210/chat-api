@@ -44,12 +44,11 @@ router.post('/', async function(req, res, next) {
 
 	var today = new Date()
 	var tz = today.getTimezoneOffset()
-	var sign = tz > 0 ? "-" : "+"
-	var hours = pad(Math.floor(Math.abs(tz)/60))
-	var minutes = pad(Math.abs(tz)%60)
-	var tzOffset = sign + hours + ":" + minutes;
+	var hours = pad(today.getHours() +1)
+	var minutes = pad(today.getMinutes())
+	console.log(hours + ':' + minutes)
 
-	var newMessage = new Message({user: user, message: message, time: tzOffset })
+	var newMessage = new Message({user: user, message: message, time: hours + ":" + minutes })
 
 	try {
 		await newMessage.save()
