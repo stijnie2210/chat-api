@@ -20,6 +20,10 @@ router.get('/:messageId', async function(req, res, next) {
 	res.json(message)
 })
 
+function pad(n) {
+    return n<10 ? '0'+n : n;
+}
+
 router.post('/', async function(req, res, next) {
 	var message = req.body.message
 	var user = req.body.user
@@ -39,7 +43,13 @@ router.post('/', async function(req, res, next) {
 	}
 
 	var today = new Date()
-	var newMessage = new Message({user: user, message: message, time: (today.getHours() + 2) + ':' + today.getMinutes() })
+	var tz = today.getTimezoneOffset()
+	var sign = tz > 0 ? "-" : "+"
+	var hours = pad(Math.floor(Math.abs(tz)/60))
+	var minutes = pad(Math.abs(tz)%60)
+	var tzOffset = sign + hours + ":" + minutes;
+
+	var newMessage = new Message({user: user, message: message, time: tzOffset })
 
 	try {
 		await newMessage.save()
