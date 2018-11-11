@@ -7,6 +7,7 @@ var router = require('express').Router(),
 	bcrypt = require('bcryptjs'),
 	messagesController = require('./MessageController'),
 	userController = require('./UserController'),
+	chatController = require('./ChatController'),
 	mongoose = require('mongoose'),
 	User = mongoose.model('User')
 
@@ -64,6 +65,7 @@ router.basePath = '/api'
 
 router.use(passport.authenticate('jwt', { session: false }))
 router.use(messagesController.basePath, messagesController)
+router.use(chatController.basePath, chatController)
 router.use(userController.basePath, userController)
 router.use('/', function(req, res) {
 	res.json({message: "Not allowed"})

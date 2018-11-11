@@ -45,6 +45,7 @@ router.post('/', async function(req, res, next) {
 	var today = new Date()
 	var tz = today.getTimezoneOffset()
 	var hours = pad(today.getHours() +1)
+	if(hours == 24) hours = "00"
 	var minutes = pad(today.getMinutes())
 	console.log(hours + ':' + minutes)
 

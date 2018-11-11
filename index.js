@@ -31,8 +31,9 @@ app.use(passport.session())
 app.use(cookieParser())
 app.use(flash())
 
-var userModel = require('./model/User')
-var messageModel = require('./model/Message')
+require('./model/User')
+require('./model/Message')
+require('./model/Chat')
 
 // Configure passport
 
