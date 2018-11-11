@@ -16,7 +16,7 @@ router.get('/:chatId', async function(req, res, next) {
 	var chat = await Chat.findSingle(chatId)
 
 	if(!chat) {
-		res.sendStatus(400)
+		res.sendStatus(401)
 	}
 
 	res.json(chat)
@@ -102,14 +102,11 @@ router.post('/', async function(req, res, next) {
     if(validOtherUser != undefined) {
         newChat = new Chat({userIds: [{ 'id': validUser._id }, { 'id': validOtherUser._id }]})
     } else {
-        console.log('oof')
         newChat = new Chat({userIds: { id: validUser._id }})
     }
 
 	try {
-        console.log('lol')
         await newChat.save()
-        console.log('saved:')
 	} catch(err) {
         console.log(err)
 	}
